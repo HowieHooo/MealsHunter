@@ -1,6 +1,6 @@
 import firebase from '../config/firebase';
+import login from './login.js';
 import home from './home.js';
-import register from './register.js';
 
 import React, { Component } from 'react';
 import {
@@ -12,7 +12,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-class Login extends Component {
+class Register extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -22,9 +22,9 @@ class Login extends Component {
   }
 
 //click on method, state will be showed in the console
-  login(){
+  register(){
     var state = this;
-    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then(function() {
+    firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(function() {
     // Login successful
     state.props.navigator.push({component: home});
     }, function(error) {
@@ -32,8 +32,8 @@ class Login extends Component {
     });
   }
 
-  register(){
-    this.props.navigator.push({component: register});
+  login(){
+    this.props.navigator.push({component: login});
   }
 
   render(){
@@ -58,14 +58,14 @@ class Login extends Component {
         //the first this reference to this whole enviroment, then find the
         //submit method, then bind the button to that method
         //the third this bind data structures to functions
-          onPress={this.login.bind(this)}
-          title="Login"/>
-        <TouchableOpacity onPress = {this.register.bind(this)}>
-          <Text>Register</Text>
+          onPress={this.register.bind(this)}
+          title="Register"/>
+        <TouchableOpacity onPress = {this.login.bind(this)}>
+          <Text>Login</Text>
         </TouchableOpacity>
       </View>
     );
   }
 }
 
-export default Login;
+export default Register;

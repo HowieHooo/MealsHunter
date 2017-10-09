@@ -1,6 +1,7 @@
 import firebase from '../config/firebase';
 import home from './home.js';
 import register from './register.js';
+import styles from '../theme/theme.js';
 
 import React, { Component } from 'react';
 import {
@@ -40,28 +41,27 @@ class Login extends Component {
     return(
       //could only return one node
       //justifyContent moves the component to the center area
-      <View style= {{flex: 1, justifyContent: 'center'}} >
-        <Text>Meals Hunter</Text>
+      <View style= {[styles.container, styles.center]} >
+        <Text style = {styles.logo}>Meals Hunter</Text>
         <TextInput
-          style = {{height: 40}}
-          placeholder = "Email"
+          style={styles.textInput}
+          placeholder = "Please type in your email"
           //the input is "email", then we associate it to the state's email
           onChangeText={(email) => this.setState({email: email})}
           value={this.state.email}/>
+        <View style={styles.line} />
         <TextInput
-          style = {{height: 40}}
-          placeholder = "Password"
+          style={styles.textInput}
+          placeholder = "Please type in your password"
           secureTextEntry = {true}
           onChangeText={(password) => this.setState({password: password})}
           value={this.state.password}/>
-        <Button
-        //the first this reference to this whole enviroment, then find the
-        //submit method, then bind the button to that method
-        //the third this bind data structures to functions
-          onPress={this.login.bind(this)}
-          title="Login"/>
-        <TouchableOpacity onPress = {this.register.bind(this)}>
-          <Text>Register</Text>
+        <View style={styles.line} />
+        <TouchableOpacity style={styles.btn} onPress={this.login.bind(this)}>
+          <Text style={ styles.text }>Submit</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.btn} onPress = {this.register.bind(this)}>
+          <Text style={ styles.text }>Register</Text>
         </TouchableOpacity>
       </View>
     );

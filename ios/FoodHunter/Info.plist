@@ -55,6 +55,8 @@
 	<string>app will use the camera to taka a food picture</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>app will use the video</string>
+	<key>NSLocationUsageDescription</key>
+	<string>use the map to locate the food</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>app will use the photo in the library</string>
 </dict>

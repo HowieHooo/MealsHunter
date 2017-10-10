@@ -23,6 +23,16 @@ class Login extends Component {
     };
   }
 
+//if the user has already login just now, the user can skip the login page
+  componentDidMount() {
+    var state = this;
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        state.props.navigator.push({ component: home });
+      }
+    });
+  }
+
 //click on method, state will be showed in the console
   login(){
     var state = this;
@@ -44,7 +54,7 @@ class Login extends Component {
       //justifyContent moves the component to the center area
       <View style={[styles.container, styles.center, styles.red]} >
         <Icon color="#ff1" name="lemon-o" size={50} />
-        <Text style={styles.logo}>FoodHunt</Text>
+        <Text style={styles.logo}> MealsHunter</Text>
         <TextInput
           style={styles.textInput}
           placeholder="Please type in your email"

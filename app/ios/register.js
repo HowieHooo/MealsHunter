@@ -2,6 +2,7 @@ import firebase from '../config/firebase';
 import login from './login.js';
 import home from './home.js';
 import styles from '../theme/theme.js';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import React, { Component } from 'react';
 import {
@@ -41,27 +42,26 @@ class Register extends Component {
     return(
       //could only return one node
       //justifyContent moves the component to the center area
-      <View style= {[styles.container, styles.center]} >
-        <Text>Meals Hunter</Text>
+      <View style={[styles.container, styles.center, styles.red]} >
+        <Icon color="#ff1" name="lemon-o" size={50} />
+        <Text style={styles.logo}> MealsHunter</Text>
         <TextInput
           style={styles.textInput}
-          placeholder = "Email"
+          placeholder="Please type in your email"
           //the input is "email", then we associate it to the state's email
           onChangeText={(email) => this.setState({email: email})}
           value={this.state.email}/>
-        <View style={styles.line} />
         <TextInput
           style={styles.textInput}
-          placeholder = "Password"
-          secureTextEntry = {true}
+          placeholder="Please type in your password"
+          secureTextEntry={true}
           onChangeText={(password) => this.setState({password: password})}
           value={this.state.password}/>
-        <View style={styles.line} />
-        <TouchableOpacity style={styles.btn} onPress = {this.register.bind(this)}>
-          <Text style={ styles.text }>Register</Text>
+        <TouchableOpacity style={styles.clearBtn} onPress={this.register.bind(this)}>
+          <Text style={ styles.text, styles.whiteText }>Register</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btn} onPress = {this.login.bind(this)}>
-          <Text style={ styles.text }>Login</Text>
+        <TouchableOpacity onPress={this.login.bind(this)}>
+          <Text style={ styles.whiteText }>Login</Text>
         </TouchableOpacity>
       </View>
     );

@@ -5,6 +5,7 @@ import uploadImage from '../config/uploadImage';
 import ImagePicker from 'react-native-image-picker';
 import RNFetchBlob from 'react-native-fetch-blob';
 import ImageResizer from 'react-native-image-resizer';
+import StarRating from 'react-native-star-rating';
 import Dimensions from 'Dimensions';
 const Blob = RNFetchBlob.polyfill.Blob
 const fs = RNFetchBlob.fs
@@ -34,7 +35,9 @@ class Post extends Component {
       },
       lat: '',
       lng: '',
-      nearby: []
+      nearby: [],
+      comment: '',
+      starCount: 0
     };
   }
 
@@ -76,7 +79,10 @@ class Post extends Component {
   }
 //create a ref called food and push the image and place under it as a object
   post(){
-    firebase.database().ref('food').push({image: this.state.image, place: this.state.place});
+    firebase.database().ref('food').push({image: this.state.image,
+                                          place: this.state.place,
+                                          comment: this.state.comment,
+                                          starCount: this.state.starCount});
     //return to the lastest page
     this.props.navigator.pop();
   }
@@ -84,6 +90,13 @@ class Post extends Component {
   back(){
     //return to the last page
     this.props.navigator.pop();
+  }
+
+//star rating function
+  onStarRatingPress(rating) {
+    this.setState({
+      starCount: rating
+    });
   }
 
   render() {
@@ -113,6 +126,25 @@ class Post extends Component {
             })}
           </ScrollView>
           <View style={styles.line} />
+          <TextInput
+            style={styles.textInput,{height: 50}}
+            placeholder="Say something about it :)"
+            onChangeText={(comment) => this.setState({comment: comment})}
+            value={this.state.email}/>
+          <View style={styles.line} />
+          <Text style={{marginTop: 10}}>How would you rate the food price?</Text>
+          <StarRating
+            disabled={false}
+            maxStars={4}
+            emptyStar={'ios-star-outline'}
+            fullStar={'ios-star'}
+            halfStar={'ios-star-half'}
+            iconSet={'Ionicons'}
+            starColor={'red'}
+            halfStarEnabled={true}
+            rating={this.state.starCount}
+            selectedStar={(rating) => this.onStarRatingPress(rating)}
+          />
           <TouchableOpacity style={ styles.btn } onPress={this.post.bind(this)}>
             <Text style={ styles.text }>Post</Text>
           </TouchableOpacity>

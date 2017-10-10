@@ -3,7 +3,9 @@ import Header from '../component/header';
 import styles from '../theme/theme.js';
 import post from './post';
 import map from './map';
+import StarRating from 'react-native-star-rating';
 import Dimensions from 'Dimensions';
+
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
 
@@ -65,6 +67,21 @@ class Home extends Component {
                 <Image source={{uri: this.state.food[key].image}}  style={{ width: deviceWidth, height: (deviceWidth*.5)}}/>
                 <Text style={styles.text}>{this.state.food[key].place.name}</Text>
                 <Text style={styles.text}>{this.state.food[key].place.address}</Text>
+                <Text style={styles.text}>Comments:  {this.state.food[key].comment}</Text>
+                <View style={{width: 100, flexDirection: 'row', left: 110}}>
+                  <Text style= {styles.text}>Price Rating: </Text>
+                  <StarRating
+                    disabled={true}
+                    maxStars={4}
+                    starSize={17}
+                    emptyStar={'ios-star-outline'}
+                    fullStar={'ios-star'}
+                    halfStar={'ios-star-half'}
+                    iconSet={'Ionicons'}
+                    starColor={'red'}
+                    rating={this.state.food[key].starCount}
+                  />
+                </View>
               </TouchableOpacity>
             )
           })}

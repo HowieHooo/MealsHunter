@@ -26,9 +26,14 @@ class Post extends Component {
     super(props);
     this.state = {
       image: 'https://firebasestorage.googleapis.com/v0/b/mealhunter-71d48.appspot.com/o/default.jpg?alt=media&token=9f0fff61-5905-400f-8a10-222b2b07ac9b',
-      place: '',
-      latitude: '',
-      longtitude: '',
+      place: {
+        name: '',
+        adress: '',
+        lat: '',
+        lng: '',
+      },
+      lat: '',
+      lng: '',
       nearby: []
     };
   }
@@ -89,17 +94,18 @@ class Post extends Component {
           <TouchableOpacity onPress = {this.photo.bind(this)}>
             <Image source={{uri: this.state.image}}  style={{ width: deviceWidth, height: (deviceWidth*.5)}}/>
           </TouchableOpacity>
-          <TextInput
-            style={styles.textInput}
-            //the length of the placeholder will be the same length that you can see what your typing?
-            placeholder="Where is this delicious food?"
-            onChangeText={(place) => this.setState({place: place})}
-            value={this.state.place}/>
+          <Text>{this.state.place.name}</Text>
           <View style={styles.line} />
           <ScrollView style= {{height: deviceHeight*0.3, width: deviceWidth-10}} >
             {Object.keys(this.state.nearby).map((key) => {
+              var store = {
+                address: this.state.nearby[key].vicinity,
+                lat: this.state.nearby[key].geometry.location.lat,
+                lng: this.state.nearby[key].geometry.location.lng,
+                name: this.state.nearby[key].name
+              }
               return(
-                <TouchableOpacity style={{padding : 10, margin: -1}} onPress={(place) =>  this.setState({place: this.state.nearby[key].name})}>
+                <TouchableOpacity style={{padding : 10, margin: -1}} onPress={(place) =>  this.setState({place: store})}>
                   <Text style={styles.text}>{this.state.nearby[key].name}</Text>
                   <Text style={styles.text}>{this.state.nearby[key].vicinity}</Text>
                 </TouchableOpacity>

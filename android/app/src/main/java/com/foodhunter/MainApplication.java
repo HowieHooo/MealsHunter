@@ -3,6 +3,8 @@ package com.foodhunter;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.airbnb.android.react.maps.MapsPackage;
 import fr.bamlab.rnimageresizer.ImageResizerPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.imagepicker.ImagePickerPackage;
@@ -26,6 +28,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new VectorIconsPackage(),
+            new MapsPackage(),
             new ImageResizerPackage(),
             new RNFetchBlobPackage(),
             new ImagePickerPackage()

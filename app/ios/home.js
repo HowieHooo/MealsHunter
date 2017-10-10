@@ -57,7 +57,7 @@ class Home extends Component {
   render() {
     return(
       <View style= {styles.container}>
-        <Header title =  "Meals Hunter" left ={this.left.bind(this)} leftText={'New +'}/>
+        <Header title =  "Meals Hunter" left ={this.left.bind(this)} leftIcon={'camera-retro'}/>
         <ScrollView>
           {Object.keys(this.state.food).map((key) => {
             return(

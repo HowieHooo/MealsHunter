@@ -41,6 +41,7 @@ var styles = StyleSheet.create({
   },
   textInput: {
     height: 50,
+    width: 300,
     textAlign: 'center',
     fontFamily: "GillSans-Light",
     backgroundColor: '#fff',

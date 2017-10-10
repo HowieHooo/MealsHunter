@@ -2,6 +2,7 @@ import firebase from '../config/firebase';
 import home from './home.js';
 import register from './register.js';
 import styles from '../theme/theme.js';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import React, { Component } from 'react';
 import {
@@ -41,27 +42,25 @@ class Login extends Component {
     return(
       //could only return one node
       //justifyContent moves the component to the center area
-      <View style= {[styles.container, styles.center]} >
-        <Text style = {styles.logo}>Meals Hunter</Text>
+      <View style={[styles.container, styles.center, styles.red]} >
+        <Icon color="#ff1" name="lemon-o" size={50} />
+        <Text style={styles.logo}>FoodHunt</Text>
         <TextInput
           style={styles.textInput}
-          placeholder = "Please type in your email"
-          //the input is "email", then we associate it to the state's email
+          placeholder="Please type in your email"
           onChangeText={(email) => this.setState({email: email})}
           value={this.state.email}/>
-        <View style={styles.line} />
         <TextInput
           style={styles.textInput}
-          placeholder = "Please type in your password"
-          secureTextEntry = {true}
+          placeholder="Please type in your password"
+          secureTextEntry={true}
           onChangeText={(password) => this.setState({password: password})}
           value={this.state.password}/>
-        <View style={styles.line} />
-        <TouchableOpacity style={styles.btn} onPress={this.login.bind(this)}>
-          <Text style={ styles.text }>Submit</Text>
+        <TouchableOpacity style={styles.clearBtn} onPress={this.login.bind(this)}>
+          <Text style={ styles.text, styles.whiteText }>Login</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btn} onPress = {this.register.bind(this)}>
-          <Text style={ styles.text }>Register</Text>
+        <TouchableOpacity onPress={this.register.bind(this)}>
+          <Text style={ styles.whiteText }>Register</Text>
         </TouchableOpacity>
       </View>
     );

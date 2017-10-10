@@ -47,7 +47,7 @@ class Post extends Component {
     navigator.geolocation.getCurrentPosition(
       (position) =>{
         const coords = position.coords.latitude + ',' + position.coords.longitude
-        const url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + coords + '&radius=2000&type=restaurant&keyword=cruise&key=AIzaSyAN6P_a6v3ZuXQYEa7RjLivMogbK7ck3Jo'
+        const url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + coords + '&radius=1500&type=restaurant&keyword=cruise&key=AIzaSyAN6P_a6v3ZuXQYEa7RjLivMogbK7ck3Jo'
         fetch(url, {method: "GET"})
         .then((response) => response.json())
         .then((responseData) => {
@@ -89,14 +89,14 @@ class Post extends Component {
   render() {
     return (
       <View >
-        <Header title="Post" left={this.back.bind(this)} leftText={'Back'}/>
+        <Header title="Post" left={this.back.bind(this)} leftIcon={'chevron-left'}/>
         <View style={ styles.center }>
           <TouchableOpacity onPress = {this.photo.bind(this)}>
             <Image source={{uri: this.state.image}}  style={{ width: deviceWidth, height: (deviceWidth*.5)}}/>
           </TouchableOpacity>
-          <Text>{this.state.place.name}</Text>
+          <Text style={{marginTop: 10, margin: 10}}>{this.state.place.name}</Text>
           <View style={styles.line} />
-          <ScrollView style= {{height: deviceHeight*0.3, width: deviceWidth-10}} >
+          <ScrollView style= {{height: deviceHeight*0.25, width: deviceWidth-10}} >
             {Object.keys(this.state.nearby).map((key) => {
               var store = {
                 address: this.state.nearby[key].vicinity,
@@ -112,6 +112,7 @@ class Post extends Component {
               )
             })}
           </ScrollView>
+          <View style={styles.line} />
           <TouchableOpacity style={ styles.btn } onPress={this.post.bind(this)}>
             <Text style={ styles.text }>Post</Text>
           </TouchableOpacity>
